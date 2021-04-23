@@ -6,9 +6,12 @@ from flask import Flask,render_template,abort
 import os
 import configparser
 app = Flask(__name__)
-
 config=configparser.ConfigParser()
-config.read("./credentials.ini")#read credentials.ini
+
+if os.path.isfile("./credentials.ini"):
+    config.read("./credentials.ini")#read credentials.ini if exist
+else:
+    config.read("./app.ini")#else read fallback.ini
 global PORT #set PORT as global
 PORT=config["DEFAULT"]["PORT"] #get port from DEFAULT of credentials.ini
 global DOCROOT #set DOCROOT as global
@@ -44,6 +47,7 @@ def error_403(e):
     return render_template('403.html'),403
 
 if __name__ == "__main__":
-    #DEBUG,HOST and PORT get from credentials.ini
-    app.run(debug=DEBUG, host=HOST,port=PORT)
+    #DEBUG,HOST and PORT get from app.ini or credentials.ini
+    app.run(debug=DEBUG, host=HOST, port=PORT)
+    #port in app.ini is default 5000
 
