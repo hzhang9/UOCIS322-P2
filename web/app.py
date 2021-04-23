@@ -13,13 +13,17 @@ if os.path.isfile("./credentials.ini"):
 else:
     config.read("./app.ini")#else read fallback.ini
 global PORT #set PORT as global
-PORT=config["DEFAULT"]["PORT"] #get port from DEFAULT of credentials.ini
+PORT=config["DEFAULT"]["PORT"] 
+#get port from DEFAULT of credentials.ini or app.ini
 global DOCROOT #set DOCROOT as global
-DOCROOT=config["DEFAULT"]["DOCROOT"] #get port from DEFAULT of credentials.ini
+DOCROOT=config["DEFAULT"]["DOCROOT"] 
+#get port from DEFAULT of credentials.ini or app.ini
 global DEBUG
-DEBUG= config["DEFAULT"]["DEBUG"] #get debug from DEFAULT of credentials.ini
+DEBUG= config["DEFAULT"]["DEBUG"] 
+#get debug from DEFAULT of credentials.ini or app.ini
 global HOST
-HOST= config["DEFAULT"]["HOST"] #get debug from DEFAULT of credentials.ini
+HOST= config["DEFAULT"]["HOST"] 
+#get host from DEFAULT of credentials.ini or app.ini
 
 @app.route("/<path:p>")
 def send(p):
